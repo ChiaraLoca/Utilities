@@ -1,0 +1,14 @@
+{
+  "name": "com.chiara-locatelli.utilities",
+  "version": "1.0.0",
+  "displayName": "Utilities",
+  "description": "My personl utilities package",
+  "unity": "6000.2",
+  "unityRelease": "7f2",
+  "author": {
+    "name": "Chiara Locatelli",
+    "email": "Chiara.Locatelli.395@gmail.com",
+    "url": "https://chiaralocatelli.com/"
+  }
+}
+
