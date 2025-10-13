@@ -94,6 +94,22 @@ namespace BehaviourTreeSystem
                 status = newStatus;
             }
         }
+        /// <summary>
+        /// Remove a child node from this node.
+        /// </summary>
+        /// <param name="child"></param>
+        public void RemoveChild(Node child)
+        {
+            children.Remove(child);
+        }
+
+        /// <summary>
+        /// Remove all child nodes from this node.
+        /// </summary>
+        public void RemoveChildren()
+        {
+            children.Clear();
+        }   
 
         /// <summary>
         /// Enumeration representing the possible statuses of a node.
