@@ -4,12 +4,11 @@ using System.Collections.Generic;
 /// 
 /// @author: Chiara Locatelli
 /// 
-/// <summary>
-/// Static class to manage game events.
-/// </summary>
-/// 
 namespace Utilities.GameEventManager
 {
+    /// <summary>
+    /// Static class to manage game events.
+    /// </summary>
     public static class EventManager 
     {
         private static readonly Dictionary<Type, Action<IGameEvent>> _events = new Dictionary<Type, Action<IGameEvent>>();

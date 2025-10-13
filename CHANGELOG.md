@@ -2,5 +2,17 @@
 
 \### GameEventManager
 
-\- Add Manager for game events
+\- Added Manager for game events
+
+
+
+\## \[1.1.0] - 2025-10-13
+
+\### BehaviourTreeSystem
+
+\- Added Behaviour Tree System
+
+
+
+&nbsp;
 
