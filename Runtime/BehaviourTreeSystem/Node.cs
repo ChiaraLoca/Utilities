@@ -57,7 +57,7 @@ namespace BehaviourTreeSystem
         /// <summary>
         /// Reset the node and its children to their initial state.
         /// </summary>
-        internal void Reset()
+        public void Reset()
         {
             foreach (Node child in children)
             {
