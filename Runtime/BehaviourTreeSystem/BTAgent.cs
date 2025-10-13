@@ -13,7 +13,7 @@ namespace BehaviourTreeSystem
     /// </summary>
     public class BTAgent : MonoBehaviour
     {
-        protected NavMeshAgent Agent;
+        public NavMeshAgent Agent;
         private ActionState _currentState;
 
         protected BehaviourTree Tree;
