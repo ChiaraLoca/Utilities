@@ -25,7 +25,9 @@ namespace BehaviourTreeSystem
 
         private Quaternion _startRotation;
         private float _rotatedAngle = 0f;
-        
+
+        protected bool Paused = false;
+
         public enum ActionState
         {
             IDLE,
@@ -53,8 +55,9 @@ namespace BehaviourTreeSystem
         {
             while (true)
             {
-                _treeStatus = Tree.Process();
-                
+                if(!Paused)
+                    _treeStatus = Tree.Process();
+
                 yield return _waitForSeconds;
             }
         }
