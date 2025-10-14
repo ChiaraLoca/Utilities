@@ -72,8 +72,6 @@ namespace BehaviourTreeSystem
         /// <param name="newStatus"></param>
         protected void DebugStatus(Status newStatus)
         {
-            if (!DebugEnabled) return;
-
             if (newStatus != status)
             {
                 Color color = Color.white;
@@ -89,8 +87,8 @@ namespace BehaviourTreeSystem
                         color = Color.yellow;
                         break;
                 }
-
-                Debug.Log($"[{GetType().Name}] {name} -> <color=#{ColorUtility.ToHtmlStringRGBA(color)}>{newStatus}</color>");
+                if(DebugEnabled)
+                    Debug.Log($"[{GetType().Name}] {name} -> <color=#{ColorUtility.ToHtmlStringRGBA(color)}>{newStatus}</color>");
                 status = newStatus;
             }
         }
