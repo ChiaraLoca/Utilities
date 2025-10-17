@@ -108,7 +108,7 @@ namespace BehaviourTreeSystem
         /// </summary>
         /// <param name="staticDestination"></param>
         /// <returns></returns>
-        public Node.Status GoToStaticLocation(Vector3 staticDestination)
+        public Node.Status GoToStaticLocation(Vector3 staticDestination, int stoppingDistance = 2)
         {
             float distance = Vector3.Distance(transform.position, staticDestination);
             if (_currentState == ActionState.IDLE)
@@ -116,7 +116,7 @@ namespace BehaviourTreeSystem
                 Agent.SetDestination(staticDestination);
                 _currentState = ActionState.WORKING;
             }
-            else if (Vector3.Distance(Agent.pathEndPosition, staticDestination) >= 2)
+            else if (Vector3.Distance(Agent.pathEndPosition, staticDestination) >= stoppingDistance)
             {
                 _currentState = ActionState.IDLE;
                 return Node.Status.FAILURE;
@@ -134,7 +134,7 @@ namespace BehaviourTreeSystem
         /// </summary>
         /// <param name="dynamicTarget"></param>
         /// <returns></returns>
-        public Node.Status GoToDynamicLocation(Transform dynamicTarget = null)
+        public Node.Status GoToDynamicLocation(Transform dynamicTarget,int stoppingDistance =2)
         {
             Vector3 destination = dynamicTarget.position;
            
@@ -145,7 +145,7 @@ namespace BehaviourTreeSystem
                 Agent.SetDestination(destination);
                 _currentState = ActionState.WORKING;
             }
-            else if (Vector3.Distance(Agent.pathEndPosition, destination) >= 2)
+            else if (Vector3.Distance(Agent.pathEndPosition, destination) >= stoppingDistance)
             {
                 _currentState = ActionState.IDLE;
                 return Node.Status.FAILURE;
