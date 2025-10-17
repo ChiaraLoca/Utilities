@@ -100,18 +100,47 @@ namespace BehaviourTreeSystem
             {
                 _rememberedPosition = transform.position + (transform.position - locationFleeFrom).normalized * distance;
             }
-            return GoToLocation(_rememberedPosition);
+            return GoToStaticLocation(_rememberedPosition);
         }
 
         /// <summary>
-        /// Make the agent move to a specified destination using the NavMeshAgent.
+        /// Make the agent move to a specified static destination using the NavMeshAgent.
         /// </summary>
-        /// <param name="destination"></param>
+        /// <param name="staticDestination"></param>
         /// <returns></returns>
-        public Node.Status GoToLocation(Vector3 destination)
+        public Node.Status GoToStaticLocation(Vector3 staticDestination)
         {
-            float distance = Vector3.Distance(transform.position, destination);
+            float distance = Vector3.Distance(transform.position, staticDestination);
             if (_currentState == ActionState.IDLE)
+            {
+                Agent.SetDestination(staticDestination);
+                _currentState = ActionState.WORKING;
+            }
+            else if (Vector3.Distance(Agent.pathEndPosition, staticDestination) >= 2)
+            {
+                _currentState = ActionState.IDLE;
+                return Node.Status.FAILURE;
+            }
+            else if (distance <= 2)
+            {
+                _currentState = ActionState.IDLE;
+                return Node.Status.SUCCESS;
+            }
+            return Node.Status.RUNNING;
+
+        }
+        /// <summary>
+        /// Make the agent move to a specified dynamic destination using the NavMeshAgent.
+        /// </summary>
+        /// <param name="dynamicTarget"></param>
+        /// <returns></returns>
+        public Node.Status GoToDynamicLocation(Transform dynamicTarget = null)
+        {
+            Vector3 destination = dynamicTarget.position;
+           
+            float distance = Vector3.Distance(transform.position, destination);
+
+            if (_currentState == ActionState.IDLE || Vector3.Distance(Agent.destination, destination) > 1f)
             {
                 Agent.SetDestination(destination);
                 _currentState = ActionState.WORKING;
@@ -129,6 +158,7 @@ namespace BehaviourTreeSystem
             return Node.Status.RUNNING;
 
         }
+
 
         /// <summary>
         /// Rotate the agent by a specified number of degrees at a given rotation speed.
