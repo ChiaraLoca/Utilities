@@ -116,7 +116,7 @@ namespace BehaviourTreeSystem
                 Agent.SetDestination(staticDestination);
                 _currentState = ActionState.WORKING;
             }
-            else if (Vector3.Distance(Agent.pathEndPosition, staticDestination) >= 2)
+            else if (Vector3.Distance(Agent.pathEndPosition, staticDestination) >= stoppingDistance)
             {
                 _currentState = ActionState.IDLE;
                 return Node.Status.FAILURE;
@@ -145,7 +145,7 @@ namespace BehaviourTreeSystem
                 Agent.SetDestination(destination);
                 _currentState = ActionState.WORKING;
             }
-            else if (Vector3.Distance(Agent.pathEndPosition, destination) >= 2)
+            else if (Vector3.Distance(Agent.pathEndPosition, destination) >= stoppingDistance)
             {
                 _currentState = ActionState.IDLE;
                 return Node.Status.FAILURE;
