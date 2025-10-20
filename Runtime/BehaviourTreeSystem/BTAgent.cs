@@ -2,8 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using static Codice.Client.Common.WebApi.WebApiEndpoints;
-using static UnityEngine.GraphicsBuffer;
+
 
 /// 
 /// @author: Chiara Locatelli
