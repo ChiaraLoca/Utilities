@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using static Codice.Client.Common.WebApi.WebApiEndpoints;
+using static UnityEngine.GraphicsBuffer;
 
 /// 
 /// @author: Chiara Locatelli
@@ -110,6 +112,12 @@ namespace BehaviourTreeSystem
         /// <returns></returns>
         public Node.Status GoToStaticLocation(Vector3 staticDestination, int stoppingDistance = 2)
         {
+            if (SafeWarp() == false)
+            {
+                _currentState = ActionState.IDLE;
+                return Node.Status.FAILURE;
+            }
+
             float distance = Vector3.Distance(transform.position, staticDestination);
             if (_currentState == ActionState.IDLE)
             {
@@ -136,6 +144,12 @@ namespace BehaviourTreeSystem
         /// <returns></returns>
         public Node.Status GoToDynamicLocation(Transform dynamicTarget,int stoppingDistance =2)
         {
+            if (SafeWarp() == false)
+            {
+                _currentState = ActionState.IDLE;
+                return Node.Status.FAILURE;
+            }
+
             Vector3 destination = dynamicTarget.position;
            
             float distance = Vector3.Distance(transform.position, destination);
@@ -159,6 +173,22 @@ namespace BehaviourTreeSystem
 
         }
 
+        private bool SafeWarp()
+        {
+            if (!Agent.isOnNavMesh)
+            {
+                NavMeshHit hit;
+                if (NavMesh.SamplePosition(Agent.transform.position, out hit, 2, NavMesh.AllAreas))
+                {
+                    Agent.Warp(hit.position);
+                    return true;
+                }
+                else
+                    return false; ;// no valid NavMesh nearby
+            }
+            return true;
+            
+        }
 
         /// <summary>
         /// Rotate the agent by a specified number of degrees at a given rotation speed.
