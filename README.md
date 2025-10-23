@@ -12,3 +12,4 @@ My utilities library for my projects
 
 * GameEventManager, a manager for game events
 * BehaviourTreeSystem
+* ReadOnlyProperty, for inspector

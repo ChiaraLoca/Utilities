@@ -14,5 +14,9 @@
 
 
 
-&nbsp;
+\## \[1.2.0] - 2025-10-23
+
+\### ReadOnlyProperty
+
+\- Added Read Only Property for inspector
 
